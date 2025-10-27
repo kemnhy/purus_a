@@ -306,7 +306,7 @@ const items = [
 
   /*  390px 이하 전용 */
   @media (max-width: 390px) {
-    padding-bottom: 30px ;
+    padding: 30px 0;
 
     .title-box {
       margin-bottom: 24px !important;

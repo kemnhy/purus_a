@@ -1,6 +1,7 @@
 <template>
   <!-- 메인비디오 배경 -->
-  <video src="/public/images/main_video.mp4" muted autoplay loop></video>
+  <!-- <video src="/public/images/main_video.mp4" muted autoplay loop></video> -->
+   <img src="/public/images/main_video.webp" alt="main-video" class="main-video">
   <div class="visual inner">
     <!-- 메인 비주얼 텍스트 -->
     <div class="text-box">
@@ -154,7 +155,7 @@ const goEstimate = () => {
 @use "../assets/styles/variables" as *;
 
 // 비디오 배경
-video {
+.main-video {
   position: absolute;
   top: 0;
   left: 0;
@@ -203,9 +204,6 @@ video {
     .btn {
       cursor: pointer;
       font-weight: bold;
-      background: transparent;
-      border: 3px solid $point-color;
-      color: $point-color;
     }
   }
   // 웹용 스크롤 안내 문구
