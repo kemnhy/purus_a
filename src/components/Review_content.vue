@@ -65,7 +65,7 @@ const reviewCards = ref([
     username: "000 고객님",
     date: "2025.09.16",
     service: "카이저제빙기 디테일 클리어서비스 이용",
-    mainImage: "/public/images/review/1.png",
+    mainImage: "/images/review/1.png",
     description:
       "퓨어러스는 제빙기 내부에 있는 모든 오염들에 대해 완벽한 케어를 목표로 하고 있습니다. 전문적인 장비와 기술로 깨끗하게 청소해주셔서 정말 만족스럽습니다.",
   },
@@ -74,7 +74,7 @@ const reviewCards = ref([
     username: "000 고객님",
     date: "2025.09.16",
     service: "카이저제빙기 디테일 클리어서비스 이용",
-    mainImage: "/public/images/review/2.png",
+    mainImage: "/images/review/2.png",
     description:
       "퓨어러스는 제빙기 내부에 있는 모든 오염들에 대해 완벽한 케어를 목표로 하고 있습니다. 전문적인 장비와 기술로 깨끗하게 청소해주셔서 정말 만족스럽습니다.",
   },
@@ -83,7 +83,7 @@ const reviewCards = ref([
     username: "000 고객님",
     date: "2025.09.16",
     service: "카이저제빙기 디테일 클리어서비스 이용",
-    mainImage: "/public/images/review/3.png",
+    mainImage: "/images/review/3.png",
     description:
       "퓨어러스는 제빙기 내부에 있는 모든 오염들에 대해 완벽한 케어를 목표로 하고 있습니다. 전문적인 장비와 기술로 깨끗하게 청소해주셔서 정말 만족스럽습니다.",
   },
@@ -92,7 +92,7 @@ const reviewCards = ref([
     username: "000 고객님",
     date: "2025.09.16",
     service: "카이저제빙기 디테일 클리어서비스 이용",
-    mainImage: "/public/images/review/4.png",
+    mainImage: "/images/review/4.png",
     description:
       "퓨어러스는 제빙기 내부에 있는 모든 오염들에 대해 완벽한 케어를 목표로 하고 있습니다. 전문적인 장비와 기술로 깨끗하게 청소해주셔서 정말 만족스럽습니다.",
   },
