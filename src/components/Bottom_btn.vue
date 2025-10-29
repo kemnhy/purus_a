@@ -1,7 +1,7 @@
 <template>
   <section v-if="show" class="btn-bg">
     <div class="inner">
-      <button @click="goEsti" class="btn">나의 견적 알아보기</button>
+      <button @click="goEsti" class="btn">무료 견적 알아보기</button>
     </div>
   </section>
 </template>
@@ -31,6 +31,7 @@ const goEsti = ()=>{
   background-color: #fff;
   padding: 20px;
   position: fixed;
+  z-index: 9999999999;
   bottom: 0;
   .inner {
     .btn {

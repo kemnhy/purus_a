@@ -6,7 +6,7 @@
     <!-- 헤더 구분선 -->
     <hr class="header_line" />
     <!-- 견적확인 -->
-    <div class="esti_check esti_inner">
+    <div class="esti_check esti_inner inner">
       <div class="esti_wrap">
         <!-- 영역 이름 -->
         <div class="esti_title">
@@ -110,7 +110,7 @@
     </div>
     <!-- 다음 버튼 -->
     <div class="fixed_btn">
-      <div class="esti_inner">
+      <div class="esti_inner inner">
         <button :class="{ active: selectedPeriod }" class="btn" @click="openCheckModal">
           예약 정보 확인하기
         </button>
@@ -374,6 +374,18 @@ const showCheckModal = ref(false);
 const showLoadingModal = ref(false);
 const showCheckAnimation = ref(false);
 const openCheckModal = () => {
+  if (address.value === "") {
+    alert("주소를 입력해주세요.");
+    return;
+  }
+  if (selectedDate.value === null) {
+    alert("서비스 날짜를 선택해주세요.");
+    return;
+  }
+  if (selectedPeriod.value === null) {
+    alert("서비스 시간을 선택해주세요.");
+    return;
+  }
   showCheckModal.value = true;
 };
 const reserCompleteModal = async () => {
@@ -467,7 +479,7 @@ const goToHome = () => {
   }
 }
 .data_w {
-  max-height: calc(100vh - 300px);
+  max-height: calc(100vh - 280px);
   overflow-y: auto;
   padding-bottom: 20px;
 }
@@ -586,6 +598,7 @@ const goToHome = () => {
     border-radius: 10px;
     background-color: $grey-color;
     cursor: pointer;
+    color: $sub-font-color;
 
     &.active {
       background: $point-color;
@@ -606,6 +619,7 @@ const goToHome = () => {
     .btn {
       width: 100%;
       font-weight: 600;
+      font-size: 18px;
       text-align: center;
       background-color: $grey-color;
       color: $border-color;
@@ -840,9 +854,12 @@ const goToHome = () => {
     margin-top: 50px;
   }
 }
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 450px) {
   .esti_inner {
     max-width: 280px;
+    .data_w {
+      max-height: calc(100dvh - (45px + 50px + 100px + 57px));
+    }
   }
   // 영역 이름
   .esti_title {
@@ -926,8 +943,8 @@ const goToHome = () => {
       }
     }
     .x-mark {
-      top: 25px;
-      right: 25px;
+      top: 20px;
+      right: 20px;
       font-size: 18px;
     }
     .modal_w {

@@ -18,7 +18,7 @@
         </li>
       </ul>
       <!-- CTA 버튼 -->
-      <button class="btn" @click="goEstimate">나의 견적 알아보기</button>
+      <button class="btn" @click="goEstimate">무료 견적 알아보기</button>
     </div>
     <!-- 스크롤 안내 문구 (웹에서만 보이게) -->
     <p class="scroll" :class="{ animate: allVisible === false }">

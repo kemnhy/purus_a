@@ -6,7 +6,7 @@
     <!-- 헤더 구분선 -->
     <hr class="header_line" />
     <!-- 견적확인 -->
-    <div class="esti_check esti_inner">
+    <div class="esti_check esti_inner inner">
       <div class="esti_wrap">
         <!-- 영역 이름 -->
         <div class="esti_title">
@@ -28,7 +28,7 @@
             </p>
             <div>
               <label
-                v-for="(brand, index) in brandInfo"
+                v-for="(brand, index) in brandList"
                 :key="index"
                 :class="{ active: selectedIndex === index }"
                 class="brand_list">
@@ -68,7 +68,7 @@
     </div>
     <!-- 견적 금액 -->
     <div class="esti_price">
-      <div class="esti_inner">
+      <div class="esti_inner inner">
         <div class="price_txt">
           <div class="price_title">
             <p>견적 금액</p>
@@ -91,30 +91,15 @@ import Header_w from "@/components/Header_w.vue";
 import Side_menu from "@/components/Side_menu.vue";
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
-
-const SHEETDB_API = "https://sheetdb.io/api/v1/63h80yl17hy1y";
 const router = useRouter();
-const brandInfo = ref([]);
 // 브랜드 목록
-
-const getBrandList = async () => {
-  try {
-    const response = await fetch(`${SHEETDB_API}?sheet=TB_BRAND`);
-    const result = await response.json();
-
-    brandInfo.value = result.map((item) => ({
-      id: item.ID,
-      name: item.BRAND_NM || "",
-      price: Number(item.PRICE) || 0,
-    }));
-  } catch (error) {
-    // console.error("Error:", error);
-  }
-};
-
-// const brandList = [
-//   { name: "그 외", price: "유선 상담" },
-// ];
+const brandList = [
+  { name: "카이저(KAISER)", price: 90000 },
+  { name: "호시자키(HOSHIZAKI)", price: 100000 },
+  { name: "아이스트로(ICETRO)", price: 80000 },
+  { name: "라셀르(Lassele)", price: 90000 },
+  { name: "그 외", price: "유선 상담" },
+];
 const selectedIndex = ref(null);
 const sizeList = [
   { size: "~ 20kg", price: 0 },
@@ -135,7 +120,7 @@ const gaugeWidth = computed(() => {
 const totalPrice = computed(() => {
   if (selectedIndex.value === null) return 0;
 
-  const brandPrice = brandInfo.value[selectedIndex.value]?.price;
+  const brandPrice = brandList[selectedIndex.value]?.price;
   const sizePrice = selectedI.value !== null ? sizeList[selectedI.value]?.price || 0 : 0;
 
   // 브랜드가 '그 외'면 문자열 반환
@@ -144,48 +129,16 @@ const totalPrice = computed(() => {
   return brandPrice + sizePrice;
 });
 
-// const selBrand = brandInfo.value[selectedIndex.value];
-// const selSize = sizeList[selectedI.value];
-// debugger;
-// console.log(selBrand.value);
-// console.log(selSize.value);
-
 const modelName = ref("");
-
 // 다음 페이지 넘어가기
 const goNextPage = () => {
-  if (selectedIndex.value === null) return 0;
   if (selectedI.value === null && selectedIndex.value === null) {
     alert("모든 옵션을 선택해주세요.");
-    return;
-  }
-
-  if (modelName.value === "" || !modelName.value.trim()) {
+  } else if (modelName.value === "") {
     alert("모델명을 입력해주세요.");
-    return;
+  } else {
+    router.push("/estimate02");
   }
-
-  // router.push("/estimate02");
-  router.push({
-    path: "/estimate02",
-    query: {
-      mdId: brandInfo.value[selectedIndex.value].id,
-      mdNm: brandInfo.value[selectedIndex.value].name,
-      mdPrice: brandInfo.value[selectedIndex.value].price,
-      size: sizeList[selectedI.value].size,
-      sizePrice: sizeList[selectedI.value].price,
-      totalPrice: totalPrice.value,
-    },
-  });
-  // router.push({
-  //   path: "/estimate02",
-  //   state: { brand: selBrand, size: selSize, modelName: modelName, totalPrice: totalPrice },
-  // });
-  // console.log("goNextPage vars", {
-  //   page, // ref인지
-  //   totalPages, // computed인지
-  //   thisContext: this, // Options/Composition 혼용 여부
-  // });
 };
 
 // 390px일때 모델명 placeholder 생기기
@@ -195,7 +148,6 @@ const updatePlaceholder = () => {
 };
 
 onMounted(() => {
-  getBrandList();
   updatePlaceholder();
   window.addEventListener("resize", updatePlaceholder);
 });
@@ -367,7 +319,7 @@ onBeforeUnmount(() => {
     max-width: 600px;
   }
 }
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 450px) {
   .esti_inner {
     max-width: 280px;
   }
@@ -442,7 +394,7 @@ onBeforeUnmount(() => {
     }
   }
   .esti_select {
-    max-height: calc(100vh - 360px);
+    max-height: calc(100dvh - (45px + 50px + 170px + 57px));
     padding-bottom: 0px;
   }
 }

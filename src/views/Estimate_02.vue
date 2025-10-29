@@ -6,7 +6,7 @@
     <!-- 헤더 구분선 -->
     <hr class="header_line" />
     <!-- 견적확인 -->
-    <div class="esti_check esti_inner">
+    <div class="esti_check esti_inner inner">
       <div class="esti_wrap">
         <!-- 영역 이름 -->
         <div class="esti_title">
@@ -114,7 +114,7 @@
     </div>
     <!-- 다음 버튼 -->
     <div class="fixed_btn">
-      <div class="esti_inner">
+      <div class="esti_inner inner">
         <div class="buttons">
           <button :class="{ active: selectAgree2 }" class="btn" @click="pushMessage">
             견적만 받기
@@ -131,148 +131,23 @@
 <script setup>
 import Header_w from "@/components/Header_w.vue";
 import Side_menu from "@/components/Side_menu.vue";
-import { ref, computed } from "vue";
-const SHEETDB_API = "https://sheetdb.io/api/v1/63h80yl17hy1y";
-
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
 
 const router = useRouter();
-const route = useRoute();
-
-// 이전 페이지 정보 가져오기
-const mdNm = route.query.MdNm;
-const mdPrice = route.query.mdPrice;
-const size = route.query.size;
-const sizePrice = route.query.sizePrice;
-const totalPrice = route.query.totalPrice;
-console.log("name/price" + mdNm + mdPrice + totalPrice);
-console.log("name/price" + size + sizePrice);
 
 // 다음버튼 나오기
 const selectAgree1 = ref(false);
 const selectAgree2 = ref(false);
-
 // 견적만 받기
 const pushMessage = () => {
-  savetest();
-
   alert("입력하신 연락처로 견적서를 보내드립니다.");
   router.push("/"); // 홈('/')으로 이동
 };
 
-const savetest = async () => {
-  try {
-    const getResponse = await fetch(SHEETDB_API, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-
-    if (!getResponse.ok) {
-      throw new Error(`GET 실패! status: ${getResponse.status}`);
-    }
-
-    const existingData = await getResponse.json();
-    // console.log("기존 데이터:", existingData);
-
-    let newId = 1; // 기본값
-    if (existingData && existingData.length > 0) {
-      const maxId = Math.max(...existingData.map((item) => Number(item.ID) || 0));
-      newId = maxId + 1;
-    }
-    // console.log(String(userName.value));
-    // console.log(Number(userPhone.value));
-
-    const newEstim = {
-      ID: Number(newId),
-      USER_ID: String(userName.value),
-      SEL_NUMBER: Number(userPhone.value),
-      // CREATE_DT: TIMESTAMP,
-    };
-    // console.log("test" + newEstim.value);
-
-    const response = await fetch(SHEETDB_API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ data: [newEstim] }),
-    });
-    console.log(" 응답 상태:", response.status, response.statusText);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const result = await response.json();
-    console.log("추가 성공:", result);
-  } catch (error) {
-    console.log("error :" + error);
-    return;
-  }
-};
 // 입력한 정보 받기
 const userName = ref("");
 const userPhone = ref("");
-
-// 게이지 계산 (단계별로 3단계)
-const gaugeWidth = computed(() => {
-  if (selectAgree1.value === true && selectAgree2.value === true) return "95%"; // 3단계
-  if (userPhone.value !== "" && userName.value !== "") return "66%"; // 2단계
-  return "33%"; // 1단계 (브랜드 선택 시작)
-});
-
-// const saveEstimInfo = async () => {
-//   try {
-//     const newEstim = {
-//       ID: Date.now().toString(),
-//       USER_ID: userName.value,
-//       SEL_NUMBER: userPhone.value,
-//       SERVICE: selBrand.name + selSize.size + modelName.value,
-//       // SIZE: ,
-//       TOTAL_PRICE: totalPrice.value,
-//       // MODEL_NO: ,
-//       CRT_DT: new Date().toISOString().split("T")[0], // YYYY-MM-DD,
-//     };
-//     console.log(newEstim);
-
-//     const response = await fetch(SHEETDB_API, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json", Accept: "application/json" },
-//       body: JSON.stringify({ data: [newReview] }),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-
-//     const result = await response.json();
-//     console.log("✅ 추가 성공:", result);
-//     alert("리뷰가 등록되었습니다!");
-//   } catch (error) {
-//     console.error("❌ 추가 실패:", error);
-//     alert(`등록 실패: ${error.message}`);
-//   }
-// };
-
-// const revInfo = ref([]);
-
-// const putUserInfo = async (userName, userPhone) => {
-//   try {
-//     const response = await fetch(SHEETDB_API, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ data: [userName, userPhone] }),
-//     });
-
-//     if (response.ok) {
-//       alert("저장 완료!");
-//       // fetchReviews();
-//     }
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// };
 
 // 다음 페이지로 넘어가면서 정보 보내기
 const goNextPage = () => {
@@ -341,7 +216,7 @@ const goNextPage = () => {
 }
 
 .input_w {
-  max-height: calc(100vh - 240px);
+  max-height: calc(100dvh - 280px);
   overflow-y: auto;
   padding-bottom: 20px;
 }
@@ -455,7 +330,7 @@ const goNextPage = () => {
   }
 
   .input_w {
-    max-height: calc(100vh - (65px + 155px + 60px));
+    // max-height: calc(100vh - (65px + 155px + 60px));
     overflow-y: auto;
     padding-bottom: 20px;
   }
@@ -479,7 +354,7 @@ const goNextPage = () => {
     }
   }
 }
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 450px) {
   .esti_inner {
     max-width: 280px;
   }
@@ -497,7 +372,7 @@ const goNextPage = () => {
   }
 
   .input_w {
-    max-height: calc(100vh - 300px);
+    max-height: calc(100dvh - (45px + 50px + 170px + 50px));
     overflow-y: auto;
     padding-bottom: 20px;
   }
@@ -571,6 +446,9 @@ const goNextPage = () => {
       .buttons {
         display: flex;
         gap: 20px;
+        .btn {
+          font-size: 18px;
+        }
       }
     }
   }
