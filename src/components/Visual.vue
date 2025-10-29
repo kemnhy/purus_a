@@ -1,7 +1,7 @@
 <template>
   <!-- 메인비디오 배경 -->
   <!-- <video src="/public/images/main_video.mp4" muted autoplay loop></video> -->
-   <img src="/public/images/main_video.webp" alt="main-video" class="main-video">
+  <img src="/public/images/main_video.webp" alt="main-video" class="main-video" />
   <div class="visual inner">
     <!-- 메인 비주얼 텍스트 -->
     <div class="text-box">
@@ -39,7 +39,7 @@ const texts = [
 ];
 
 // router
-const router = useRouter(); 
+const router = useRouter();
 
 // 상태관리
 const currentIndex = ref(0); //현재 노출중인 문장 인덱스
@@ -49,7 +49,7 @@ const allVisible = ref(false); //모든 문장 노출 완료 여부
 const activeLines = ref(Array(texts.length).fill(false)); //애니메이션 활성 상태
 let intervalId = null;
 
-//웹 - 스크롤 핸들러 
+//웹 - 스크롤 핸들러
 const handleScroll = async (e) => {
   // 스크롤이 맨 위일 때만 작동
   if (window.scrollY !== 0) return;
@@ -204,6 +204,9 @@ const goEstimate = () => {
     .btn {
       cursor: pointer;
       font-weight: bold;
+      background: none;
+      border: 2.5px solid $point-color;
+      color: $point-color;
     }
   }
   // 웹용 스크롤 안내 문구
@@ -276,7 +279,7 @@ const goEstimate = () => {
     .text-box {
       padding-bottom: 15%;
       text-align: center;
-      p{
+      p {
         font-weight: 500;
       }
       .main-txt {
