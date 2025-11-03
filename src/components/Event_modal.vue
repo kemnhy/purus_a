@@ -184,8 +184,8 @@ $border-grad: linear-gradient(135deg, $g1 0%, $g2 25%, $g3 60%, $g4 100%);
 @media screen and (max-width: 390px) {
   .event_modal {
     position: fixed;
-    width: 100%;
-    top: 79%;
+    width: 90%;
+    // top: 79%;
     border-radius: 0;
     .glass-btn {
       p {

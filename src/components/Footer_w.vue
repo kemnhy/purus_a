@@ -30,7 +30,7 @@
   width: 100%;
   background-color: $grey-color;
 
-  padding: 30px 0;
+  padding: 30px 0 120px;
 
   .inner {
     display: flex;
@@ -94,7 +94,7 @@
 // 390px 반응형 모바일
 @media screen and (max-width: 390px) {
   .footer {
-    padding: 15px 0;
+    padding: 30px 0 120px;
     .inner {
       flex-direction: column;
       gap: 15px;
